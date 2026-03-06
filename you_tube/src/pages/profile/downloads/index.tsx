@@ -7,6 +7,8 @@ import { Download, MonitorPlay } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { toast } from "sonner";
 import { useRouter } from "next/router";
+import { getMediaUrl } from "@/lib/utils";
+
 
 export default function Downloads() {
     const { user } = useUser();
@@ -77,7 +79,7 @@ export default function Downloads() {
                                     <div className="w-48 flex-shrink-0">
                                         <div className="aspect-video bg-gray-200 rounded-lg relative overflow-hidden group">
                                             <video
-                                                src={`http://localhost:5000/${video.filepath}`}
+                                                src={getMediaUrl(video.filepath)}
                                                 className="w-full h-full object-cover"
                                             />
                                         </div>

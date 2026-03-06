@@ -133,7 +133,7 @@ const Header = () => {
                                     <Link href="/liked">Liked Videos</Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild>
-                                    <Link href="/watch">Watch Later</Link>
+                                    <Link href="/watch-later">Watch Later</Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild className="bg-red-50 text-red-600 font-bold focus:bg-red-100 focus:text-red-700">
                                     <Link href="/plans">💎 Upgrade to Premium</Link>

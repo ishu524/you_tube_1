@@ -15,6 +15,10 @@ import paymentroutes from "./routes/payment.js";
 import downloadroutes from "./routes/download.js";
 import http from "http";
 import { Server } from "socket.io";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
+
 
 
 const app = express();
@@ -37,9 +41,20 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.get("/", (req, res) => {
     res.send("You tube backend is working");
 });
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Ensure uploads directory exists
+const uploadDir = path.join(__dirname, "uploads");
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
 app.use("/user", userroutes);
 app.use("/video", videoroutes);
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static(uploadDir));
+
 app.use("/like", likeroutes);
 app.use("/watch", watchlaterroutes);
 app.use("/history", historyroutes);
