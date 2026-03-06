@@ -24,7 +24,14 @@ export const useWebRTC = (userId: string, onIncomingCall?: (from: string, name: 
 
     // Initialize Socket Connection
     useEffect(() => {
-        const newSocket = io(process.env.NEXT_PUBLIC_SIGNALING_URL || 'http://localhost:5000');
+        // Correctly handle signaling URL based on environment
+        const signalingUrl = process.env.NEXT_PUBLIC_SIGNALING_URL || 'http://localhost:5000';
+        
+        if (process.env.NODE_ENV === "production" && !process.env.NEXT_PUBLIC_SIGNALING_URL) {
+            console.warn('[WEBRTC]: NEXT_PUBLIC_SIGNALING_URL is missing in production. Falling back to localhost.');
+        }
+
+        const newSocket = io(signalingUrl);
         setSocket(newSocket);
 
         newSocket.on('connect', () => {

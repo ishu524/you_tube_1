@@ -109,11 +109,17 @@ const DBURL = process.env.DB_URL;
 mongoose
     .connect(DBURL)
     .then(() => {
-        console.log("Mongodb connected");
+        console.log("✅ Mongodb connected successfully");
+        console.log(`📡 Backend URL: http://localhost:${PORT}`);
+        console.log(`🌐 Configured Frontend URL: ${process.env.FRONTEND_URL}`);
+        if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+            console.warn("⚠️  WARNING: EMAIL_USER or EMAIL_PASS not set! OTP emails will fail.");
+        }
     })
     .catch((error) => {
-        console.log(error);
+        console.error("❌ Mongodb connection error:", error);
     });
+
 
 console.log("Server setup complete, ready for connections. (Restart)");
 
