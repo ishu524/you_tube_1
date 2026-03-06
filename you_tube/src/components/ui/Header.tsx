@@ -29,7 +29,7 @@ const Header = () => {
     //    };
 
     const [searchQuery, setSearchQuery] = useState("");
-    const [hasChannel, SetHasChannel] = useState(false);
+    const hasChannel = !!user?.channelname;
     const [isdialogueopen, SetIsdialogueopen] = useState(false);
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const handleSearch = (e: React.FormEvent) => {

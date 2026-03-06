@@ -9,16 +9,15 @@ import HistoryContent from "./HistoryContent";
 import ChannelDialogue from "./ChannelDialogue";
 // ❌ removed DropdownMenuItem import
 
+import { useUser } from "@/lib/AuthContext";
+
 const Sidebar = () => {
     const pathname = usePathname();
-    const user = {
-        id: 1,
-        name: "John Doe",
-        email: "john.doe@example.com",
-        image: "https://tse2.mm.bing.net/th/id/OIP.9-uO9K5uFpERhAc8OShvlQHaFj?pid=Api&P=0&h=180",
-    };
-    const [hasChannel, SetHasChannel] = useState(false);
+    const { user } = useUser();
     const [isdialogueopen, SetIsdialogueopen] = useState(false);
+    
+    // Check if user has a channel by looking for channelname in DB
+    const hasChannel = !!user?.channelname;
 
     return (
         <aside className="w-64 bg-[var(--sidebar)] border-r border-[var(--sidebar-border)] min-h-screen p-2 transition-colors duration-300">
@@ -74,7 +73,7 @@ const Sidebar = () => {
 
                             {hasChannel ? (
                                 <div>
-                                    <Link href={`/channel/${user.id}`}>
+                                    <Link href={`/channel/${user?._id}`}>
                                         <Button variant="ghost" className="w-full justify-start">
                                             <User className="w-5 h-5 mr-3" />
                                             Your channel

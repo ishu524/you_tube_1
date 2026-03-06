@@ -297,7 +297,7 @@ const Comments = ({ videoId }: any) => {
                     comments.map((comment) => (
                         <div key={comment._id} className="flex gap-4">
                             <Avatar className="w-10 h-10">
-                                <AvatarFallback>{comment.usercommented[0]}</AvatarFallback>
+                                <AvatarFallback>{comment.usercommented?.[0] || "U"}</AvatarFallback>
                             </Avatar>
                             <div className="flex-1">
                                 <div className="flex items-center gap-2 mb-1">
